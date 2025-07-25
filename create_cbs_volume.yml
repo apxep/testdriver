@@ -10,7 +10,7 @@
   tasks:
   - name: create volume
     purefa_volume:
-      name: "{{ ansible_host }}-{{ volname }}"
+      name: "{{ inventory_hostname }}-{{ volname }}"
       size: "{{ size }}"
       fa_url: "{{ fa1_url }}"
       api_token: "{{ fa1_api }}"
