@@ -16,7 +16,7 @@
       api_token: “{{ fa1_api }}”
       state: present
     register: new_volume
-      delegate_to: localhost
+    delegate_to: localhost
 
   - name: print volume info
     debug:
