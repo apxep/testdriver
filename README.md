@@ -6,5 +6,6 @@ Tools to accelerate the Test Drive environment.
      git clone https://github.com/apxep/testdriver
 4. Run the linux_prep.bash script.
 5. Execute the windows_prep.ps1 commands on the Windows VM.
-6. Run playbooks.
+6. Run the demo_prep.bash script - note that it will require input.
+7. Run playbooks.
 
