@@ -1,0 +1,17 @@
+---
+- name: create host and attach volume
+  hosts: all
+  gather_facts: yes
+  collections:
+  - purestorage.flasharray
+  vars:
+    ansible_python_interpreter: auto
+
+  tasks:
+  - name: create host and attach volume
+    purefa_host:
+      host: “{{ ansible_host }}”
+      volume: “{{ volname }}”
+      iqn: “{{ ansible_iscsi_iqn }}”
+      fa_url: “{{ my_fa_url }}”
+      api_token: “{{ my_fa_api }}”
