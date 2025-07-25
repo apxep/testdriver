@@ -10,8 +10,8 @@
   tasks:
   - name: create host and attach volume
     purefa_host:
-      host: “{{ ansible_host }}”
-      volume: “{{ volname }}”
-      iqn: “{{ ansible_iscsi_iqn }}”
-      fa_url: “{{ my_fa_url }}”
-      api_token: “{{ my_fa_api }}”
+      host: "{{ ansible_host }}"
+      volume: "{{ ansible_host }}-{{ volname }}"
+      iqn: "{{ ansible_iscsi_iqn }}"
+      fa_url: "{{ my_fa_url }}"
+      api_token: "{{ my_fa_api }}"
