@@ -3,10 +3,10 @@ ansible-galaxy collection install purestorage.flasharray
 git clone https://github.com/PureStorage-OpenConnect/ansible-playbook-examples
 
 # requires password input
-ssh pureuser@flasharray1.testdrive.local “pureadmin create --api-token” | awk ‘/local/ {print $3}’ > ~/flasharray1.token
-# requires password input
+ssh pureuser@flasharray1.testdrive.local “pureadmin create --api-token” | awk '/local/ {print $3}' > ~/flasharray1.token
 
-ssh pureuser@flasharray2.testdrive.local “pureadmin create --api-token” | awk ‘/local/ {print $3}’ > ~/flasharray2.token
+# requires password input
+ssh pureuser@flasharray2.testdrive.local “pureadmin create --api-token” | awk '/local/ {print $3}' > ~/flasharray2.token
 
 ssh-keygen 
 # requires input, <return>
