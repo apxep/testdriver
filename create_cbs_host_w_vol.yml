@@ -8,10 +8,20 @@
     ansible_python_interpreter: auto
 
   tasks:
+  - name: get IQN from Windows
+    win_shell: Write-Host "$((Get-InitiatorPort).NodeAddress)"
+    register: win_iqn
+    when: ansible_os_family == "Windows"
+
+  - set_fact:
+      iqn: "{{ win_iqn.stdout_lines[0] }}"
+    when: (win_iqn is defined)
+  
   - name: create host and attach volume
     purefa_host:
       host: "{{ inventory_hostname }}"
       volume: "{{ inventory_hostname }}-{{ volname }}"
-      iqn: "{{ ansible_iscsi_iqn }}"
-      fa_url: "{{ my_fa_url }}"
-      api_token: "{{ my_fa_api }}"
+      iqn: "{{ iqn | default(ansible_iscsi_iqn) }}"
+      fa_url: "{{ fa1_url }}"
+      api_token: "{{ fa1_api }}"
+    delegate_to: localhost
