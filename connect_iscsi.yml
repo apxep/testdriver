@@ -1,0 +1,33 @@
+---
+- name: connect to iscsi volume
+  hosts: all
+  gather_facts: yes
+  become: no
+
+  vars:
+    portal: 10.0.0.11
+
+  tasks:
+  - block:
+    - name: discover and login
+      community.general.open_iscsi:
+        portal: "{{ portal }}"
+        login: true
+        discover: true
+      become: yes
+
+    - name: rescan
+      community.general.open_iscsi:
+        rescan: true
+      become: yes
+
+    when: ansible_os_family == "RedHat"
+
+  - block:
+    - name: discover and login
+      win_shell: "New-IscsiTargetPortal -TargetPortalAddress {{ portal }}"
+
+    - name: connect and scan
+      win_shell: "Get-IscsiTarget | Connect-IscsiTarget"
+
+    when: ansible_os_family == "Windows"
