@@ -21,6 +21,27 @@
         rescan: true
       become: yes
 
+   - name: partition
+      community.general.parted:
+        device: /dev/sdb
+        number: 1
+        state:  present
+        fs_type: xfs
+      become: yes
+
+    - name: filesystem
+      community.general.filesystem:
+        device: /dev/sdb1
+        fstype: xfs
+      become: yes
+
+    - ansible.posix.mount:
+        state: mounted
+        src: /dev/sdb1
+        path: /puredata
+        fstype: xfs
+      become: yes
+      
     when: ansible_os_family == "RedHat"
 
   - block:
@@ -29,5 +50,21 @@
 
     - name: connect and scan
       win_shell: "Get-IscsiTarget | Connect-IscsiTarget"
+
+    - name: init and activate
+      community.windows.win_initialize_disk:
+        disk_number: 1
+
+    - name: partition
+      community.windows.win_partition:
+        disk_number: 1
+        partition_size: -1
+        drive_letter: P
+
+    - name: format
+      community.windows.win_format:
+        drive_letter: P
+        file_system: NTFS
+        new_label: "Pure-Volume"
 
     when: ansible_os_family == "Windows"
