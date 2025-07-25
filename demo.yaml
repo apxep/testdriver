@@ -1,0 +1,8 @@
+---
+- name: Run the Demo
+  hosts: all
+  gather_facts: no
+
+- import_playbook: create_cbs_volume.yml
+- import_playbook: create_cbs_host_w_vol.yml
+- import_playbook: connect_iscsi.yml
