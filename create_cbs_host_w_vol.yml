@@ -11,7 +11,7 @@
   - name: create host and attach volume
     purefa_host:
       host: "{{ ansible_host }}"
-      volume: "{{ ansible_host }}-{{ volname }}"
+      volume: "{{ inventory_hostname }}-{{ volname }}"
       iqn: "{{ ansible_iscsi_iqn }}"
       fa_url: "{{ my_fa_url }}"
       api_token: "{{ my_fa_api }}"
