@@ -21,7 +21,7 @@
         rescan: true
       become: yes
 
-   - name: partition
+    - name: partition
       community.general.parted:
         device: /dev/sdb
         number: 1
