@@ -10,10 +10,10 @@
   tasks:
   - name: create volume
     purefa_volume:
-      name: “{{ volname }}”
-      size: “{{ size }}”
-      fa_url: “{{ fa1_url }}”
-      api_token: “{{ fa1_api }}”
+      name: "{{ ansible_host }}-{{ volname }}"
+      size: "{{ size }}"
+      fa_url: "{{ fa1_url }}"
+      api_token: "{{ fa1_api }}"
       state: present
     register: new_volume
     delegate_to: localhost
