@@ -15,7 +15,7 @@
 
   - set_fact:
       iqn: "{{ win_iqn.stdout_lines[0] }}"
-    when: (win_iqn is defined)
+    when: (win_iqn.stdout_lines is defined)
   
   - name: create host and attach volume
     purefa_host:
