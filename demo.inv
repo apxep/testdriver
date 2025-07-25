@@ -1,0 +1,6 @@
+[linux]
+linux1 ansible_host=linux1.testdrive.local ansible_user=pureuser
+[windows]
+windows1 ansible_host=10.0.1.1 ansible_user=administrator ansible_connection=psrp ansible_winrm_transport=credssp ansible_winrm_server_cert_validation=ignore
+
+
