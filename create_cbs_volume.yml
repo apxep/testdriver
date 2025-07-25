@@ -1,0 +1,23 @@
+---
+- name: create volume
+  hosts: all
+  gather_facts: yes
+  collections:
+  - purestorage.flasharray
+  vars:
+    ansible_python_interpreter: auto
+  
+  tasks:
+  - name: create volume
+    purefa_volume:
+      name: “{{ volname }}”
+      size: “{{ size }}”
+      fa_url: “{{ fa1_url }}”
+      api_token: “{{ fa1_api }}”
+      state: present
+    register: new_volume
+      delegate_to: localhost
+
+  - name: print volume info
+    debug:
+      var: new_volume
