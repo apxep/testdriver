@@ -1,0 +1,28 @@
+ansible-galaxy collection install purestorage.flasharray
+
+git clone https://github.com/PureStorage-OpenConnect/ansible-playbook-examples
+
+# requires password input
+ssh pureuser@flasharray1.testdrive.local “pureadmin create --api-token” | awk ‘/local/ {print $3}’ > ~/flasharray1.token
+# requires password input
+
+ssh pureuser@flasharray2.testdrive.local “pureadmin create --api-token” | awk ‘/local/ {print $3}’ > ~/flasharray2.token
+
+ssh-keygen 
+# requires input, <return>
+ssh-copy-id linux1.testdrive.local
+# requires password input, this will make ansible work with SSH keys
+
+# export PUREFA_URL=flasharray1.testdrive.local
+# export PUREFA_API=”$(cat flasharray1.token)”
+
+## SMOKE TEST
+# ansible all -c local -i “localhost,” -m purestorage.flasharray.purefa_info
+
+cat > ~/vars.yml << EOF
+fa1_url: flasharray1.testdrive.localfa
+fa1_api: $(cat flasharray1.token)
+fa2_url: flasharray2.testdrive.local
+fa2_api: $(cat flasharray2.token)
+EOF
+
