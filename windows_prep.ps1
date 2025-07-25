@@ -60,3 +60,5 @@ $firewallParams = @{
     Protocol    = 'TCP'
 }
 New-NetFirewallRule @firewallParams
+
+Enable-WSManCredSSP -Role Server -Force
