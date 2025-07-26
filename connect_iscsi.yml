@@ -38,7 +38,7 @@
     - ansible.posix.mount:
         state: mounted
         src: /dev/sdb1
-        path: /puredata
+        path: "/{{ volname }}"
         fstype: xfs
       become: yes
       
@@ -65,6 +65,6 @@
       community.windows.win_format:
         drive_letter: P
         file_system: NTFS
-        new_label: "Pure-Volume"
+        new_label: "{{ volname }}"
 
     when: ansible_os_family == "Windows"
