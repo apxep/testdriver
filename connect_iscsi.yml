@@ -47,10 +47,12 @@
   - block:
     - name: discover and login
       win_shell: "New-IscsiTargetPortal -TargetPortalAddress {{ portal }}"
+      ignore_errors: yes
 
     - name: connect and scan
       win_shell: "Get-IscsiTarget | Connect-IscsiTarget"
-
+      ignore_errors: yes
+      
     - name: init and activate
       community.windows.win_initialize_disk:
         disk_number: 1
