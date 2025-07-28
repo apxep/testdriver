@@ -38,7 +38,7 @@
     - ansible.posix.mount:
         state: mounted
         src: /dev/sdb1
-        path: "/{{ volname }}"
+        path: "/{{ inventory-hostname }}-{{ volname }}"
         fstype: xfs
       become: yes
       
@@ -67,6 +67,6 @@
       community.windows.win_format:
         drive_letter: P
         file_system: NTFS
-        new_label: "{{ volname }}"
+        new_label: "{{ inventory-hostname }}-{{ volname }}"
 
     when: ansible_os_family == "Windows"
