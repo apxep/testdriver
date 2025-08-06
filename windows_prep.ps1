@@ -62,3 +62,18 @@ $firewallParams = @{
 New-NetFirewallRule @firewallParams
 
 Enable-WSManCredSSP -Role Server -Force
+
+winget install --id Microsoft.PowerShell --source winget
+
+New-Item -Type Directory -Path C:\Demos
+                                                                                                                                                                                                                                                                                                 
+$dlpath = "C:\Demos\git-install.exe"
+
+## $source = "https://git-scm.com/download/win"
+$source = "https://github.com/git-for-windows/git/releases/download/v2.49.0.windows.1/Git-2.49.0-64-bit.exe"
+
+Start-BitsTransfer $source $dlpath
+
+Start-Process -FilePath $dlpath -ArgumentList "/SILENT","/NORESTART","/DIR=`"C:\Program Files\Git`"" -wait -NoNewWindow
+
+
