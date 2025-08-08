@@ -1,0 +1,7 @@
+ if ( -not  $(Test-Connection linux2.testdrive.local ) ) { Write-Host "True" }
+
+$ipaddr = $( Get-NetIPAddress | where IPAddress -like "10.*" ).IPAddress
+
+# set-content "hostname: $hostname"  - file_to_copy_to_linux
+
+# set-content "ipaddr: $ipaddr" - file_to_copy_to_linux
