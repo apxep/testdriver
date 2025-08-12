@@ -8,7 +8,7 @@ $ipaddr = $( Get-NetIPAddress | where IPAddress -like "10.*" ).IPAddress
 
 # New-ADGroup -Name "Pure Admins" -SamAccountName purestorageadmins -GroupScope Global -GroupCategory Security
 
-# New-ADUser -Name "Pat Admin" -SamAccounName padmin -AccountPassword $(ConvertTo-SecureString -String "pureuser" -AsPlainText -Force)
+# New-ADUser -Name "Pat Admin" -SamAccountName padmin -AccountPassword $(ConvertTo-SecureString -String "pureuser" -AsPlainText -Force)
 
 # Add-ADGroupMember -Members padmin purestorageadmins
 
