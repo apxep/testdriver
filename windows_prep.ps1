@@ -76,4 +76,7 @@ Start-BitsTransfer $source $dlpath
 
 Start-Process -FilePath $dlpath -ArgumentList "/SILENT","/NORESTART","/DIR=`"C:\Program Files\Git`"" -wait -NoNewWindow
 
+ Add-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature
+
+ 
 
