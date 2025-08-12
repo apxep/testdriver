@@ -5,3 +5,10 @@ $ipaddr = $( Get-NetIPAddress | where IPAddress -like "10.*" ).IPAddress
 # set-content "hostname: $hostname"  - file_to_copy_to_linux
 
 # set-content "ipaddr: $ipaddr" - file_to_copy_to_linux
+
+# New-ADGroup -Name "Pure Admins" -SamAccountName purestorageadmins -GroupScope Global -GroupCategory Security
+
+# New-ADUser -Name "Pat Admin" -SamAccounName padmin -AccountPassword $(ConvertTo-SecureString -String "pureuser" -AsPlainText -Force)
+
+# Add-ADGroupMember -Members padmin purestorageadmins
+
