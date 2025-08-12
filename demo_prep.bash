@@ -16,8 +16,8 @@ TOKEN2=$(sshpass -p "pureuser" ssh pureuser@flasharray2.testdrive.local -o Stric
 [[ -z $TOKEN2 ]] && TOKEN2=$(sshpass -p "pureuser" ssh pureuser@flasharray2.testdrive.local -o StrictHostKeyChecking=No "pureadmin create --api-token" | awk '/local/ {print $3}')
 
 
-echo $TOKEN1 > $DEMODIR/flasharray1.token)
-echo $TOKEN2 > $DEMODIR/flasharray2.token)
+echo $TOKEN1 > $DEMODIR/flasharray1.token
+echo $TOKEN2 > $DEMODIR/flasharray2.token
 
 ssh-keygen -t rsa -b 2048 -f  ~/.ssh/rsa -N "" -q
 
