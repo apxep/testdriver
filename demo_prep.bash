@@ -5,18 +5,23 @@
 cd $DEMODIR
 ansible-galaxy collection install purestorage.flasharray
 
-git clone https://github.com/PureStorage-OpenConnect/ansible-playbook-examples
+#git clone https://github.com/PureStorage-OpenConnect/ansible-playbook-examples
 
 # requires password input
-ssh pureuser@flasharray1.testdrive.local "pureadmin create --api-token" | awk '/local/ {print $3}' > $DEMODIR/flasharray1.token
+TOKEN1=$(sshpass -p "pureuser" ssh pureuser@flasharray1.testdrive.local -o StrictHostKeyChecking=No "pureadmin list --api-token" | awk '/local/ {print $3}')
+[[ -z $TOKEN1 ]] && TOKEN1=$(sshpass -p "pureuser" ssh pureuser@flasharray1.testdrive.local -o StrictHostKeyChecking=No "pureadmin create --api-token" | awk '/local/ {print $3}')
 
 # requires password input
-ssh pureuser@flasharray2.testdrive.local "pureadmin create --api-token" | awk '/local/ {print $3}' > $DEMODIR/flasharray2.token
+TOKEN2=$(sshpass -p "pureuser" ssh pureuser@flasharray2.testdrive.local -o StrictHostKeyChecking=No "pureadmin list --api-token" | awk '/local/ {print $3}')
+[[ -z $TOKEN2 ]] && TOKEN2=$(sshpass -p "pureuser" ssh pureuser@flasharray2.testdrive.local -o StrictHostKeyChecking=No "pureadmin create --api-token" | awk '/local/ {print $3}')
 
-ssh-keygen 
-# requires input, <return>
-ssh-copy-id linux1.testdrive.local
-# requires password input, this will make ansible work with SSH keys
+
+echo $TOKEN1 > $DEMODIR/flasharray1.token)
+echo $TOKEN2 > $DEMODIR/flasharray2.token)
+
+ssh-keygen -t rsa -b 2048 -f  ~/.ssh/rsa -N "" -q
+
+sshpass -p "pureuser" ssh-copy-id linux1.testdrive.local
 
 cat > $DEMODIR/vars.yml << EOF
 fa1_url: flasharray1.testdrive.local
