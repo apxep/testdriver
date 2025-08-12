@@ -19,7 +19,7 @@ TOKEN2=$(sshpass -p "pureuser" ssh pureuser@flasharray2.testdrive.local -o Stric
 echo $TOKEN1 > $DEMODIR/flasharray1.token
 echo $TOKEN2 > $DEMODIR/flasharray2.token
 
-ssh-keygen -t rsa -b 2048 -f  ~/.ssh/rsa -N "" -q
+ssh-keygen -t rsa -b 2048 -f  ~/.ssh/id_rsa -N "" -q
 
 sshpass -p "pureuser" ssh-copy-id linux1.testdrive.local
 
