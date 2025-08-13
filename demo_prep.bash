@@ -1,4 +1,4 @@
-[[ -z "$DEMODIR" ]] && DEMODIR=~/demo
+[[ -z "$DEMODIR" ]] && DEMODIR=~/testdriver
 
 [[ -x $DEMODIR ]] || mkdir $DEMODIR
 
@@ -7,14 +7,11 @@ ansible-galaxy collection install purestorage.flasharray
 
 #git clone https://github.com/PureStorage-OpenConnect/ansible-playbook-examples
 
-# requires password input
 TOKEN1=$(sshpass -p "pureuser" ssh pureuser@flasharray1.testdrive.local -o StrictHostKeyChecking=No "pureadmin list --api-token --expose" | awk '/local/ {print $3}')
 [[ -z $TOKEN1 ]] && TOKEN1=$(sshpass -p "pureuser" ssh pureuser@flasharray1.testdrive.local -o StrictHostKeyChecking=No "pureadmin create --api-token" | awk '/local/ {print $3}')
 
-# requires password input
 TOKEN2=$(sshpass -p "pureuser" ssh pureuser@flasharray2.testdrive.local -o StrictHostKeyChecking=No "pureadmin list --api-token --expose" | awk '/local/ {print $3}')
 [[ -z $TOKEN2 ]] && TOKEN2=$(sshpass -p "pureuser" ssh pureuser@flasharray2.testdrive.local -o StrictHostKeyChecking=No "pureadmin create --api-token" | awk '/local/ {print $3}')
-
 
 echo $TOKEN1 > $DEMODIR/flasharray1.token
 echo $TOKEN2 > $DEMODIR/flasharray2.token
