@@ -80,9 +80,10 @@ Add-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature
 
 New-ADGroup -Name "Pure Admins" -SamAccountName purestorageadmins -GroupScope Global -GroupCategory Security
 
-New-ADUser -Name "Pat Admin" -SamAccountName padmin -AccountPassword $(ConvertTo-SecureString -String "pureuser" -AsPlainText -Force)
-
+New-ADUser -Name "Pat Admin" -SamAccountName padmin -AccountPassword $(ConvertTo-SecureString -String "pureuser" -AsPlainText -Force) -Enabled $true
+ 
 Add-ADGroupMember -Members padmin purestorageadmins
  
-New-ADUser -Name "Bind User" -SamAccountName binduser -AccountPassword $(ConvertTo-SecureString -String "pureuser" -AsPlainText -Force)
+New-ADUser -Name "Bind User" -SamAccountName binduser -AccountPassword $(ConvertTo-SecureString -String "pureuser" -AsPlainText -Force) -Enabled $true
+
 
