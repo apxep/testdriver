@@ -1,3 +1,5 @@
+Note that this project is specific to Pure Test Drive and makes many assumptions based on that environment.  
+
 Tools to accelerate the Test Drive environment.  
 
 1. ssh to the Linux VM and install git: 
